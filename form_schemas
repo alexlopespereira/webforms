@@ -1,0 +1,21 @@
+### File
+{
+  "schema": {
+    "backgroundimage" : {
+      "title": "Background image for TV version",
+      "type": "object"
+    }
+  },
+  "form": [
+    {
+      "type": "fieldset",
+      "legend": "Styles",
+      "items": [
+        {
+          "key" : "backgroundimage",
+          "type": "file-hosted-public"
+        }
+      ]
+    }
+  ]
+}
