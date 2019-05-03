@@ -9,8 +9,7 @@ def index():
 
 @app.route('/create_form', methods=["POST"])
 def create_form():
-    form = request.form.to_dict()
-    print(form)
+    print(request.json)
     return send_from_directory("jsonform", 'generator.html')
 
 app.run()
