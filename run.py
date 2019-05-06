@@ -1,6 +1,6 @@
 from eve import Eve
 from flask import send_from_directory, request
-
+from schemas import all_schemas
 app = Eve(__name__, static_folder="jsonform")
 
 @app.route('/')
