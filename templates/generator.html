@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Servico XXXX</title>
+    <!--<link rel="stylesheet" type="text/css" href="deps/opt/bootstrap.css"/>-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/styles.38d521a2fe6425022110.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/style.css"/>
+	<style type="text/css">
+      .container {
+        max-width: 900px;
+      }
+    </style>
+</head>
+
+<body>
+<div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	</div>
+	<div class="container">
+        <form id="autoform"></form>
+        <div id="res" class="alert"></div>
+		<div class="panel panel-default">
+		  <!-- Default panel contents -->
+			<div class="panel-heading">Tabela de Campos</div>
+			</div>
+			<form method="post" onsubmit="return send_table_data();">
+				 <table class="table" id="fieldTable">
+					  </table>
+				<input type="submit" name="Enviar" class="btn btn-primary"/>
+			</form>
+		</div>
+
+    </div>
+
+	<script type="text/javascript" src="deps/jquery.min.js"></script>
+	<script type="text/javascript" src="deps/underscore.js"></script>
+	<script type="text/javascript" src="deps/opt/jsv.js"></script>
+	<script type="text/javascript" src="lib/jsonform.js"></script>
+	<script>
+		function addLine(name) {
+			var index = document.getElementById("fieldTable").rows.length;
+			$("#fieldTable").append(
+			  '<tr>' +
+				"<td>" + index + "</td>" +
+				"<td>" + name + "</td>" +
+				"<td>" + '<div class="btn-group btn-group-xs"><button type="button" class="btn" onclick="return del_row('+ index +');"><span class="glyphicon glyphicon-remove"></span></button></div>' + "</td>" +
+				"<td style='display:none;'>" + name + "</td>" +
+			  "</tr>"
+			);
+		}
+		var TableData;
+		TableData = storeTblValues()
+		TableData = JSON.stringify(TableData);
+		function storeTblValues()
+		{
+			var TableData = new Array();
+			$('#fieldTable tr').each(function(row, tr){
+				TableData[row]=$(tr).find('td:eq(3)').text()
+			});
+			//TableData.shift();  // first row will be empty - so remove
+			return TableData;
+		}
+		function send_table_data(){
+			tdata = storeTblValues()
+			submited = true
+			$.ajax({
+				type: "POST",
+				url: "/create_form",
+				data: JSON.stringify(tdata),
+				contentType: 'application/json;charset=UTF-8',
+				success: function(msg){
+					// return value stored in msg variable
+				}
+			});
+		}
+		function del_row(index) {
+		  document.getElementById("fieldTable").deleteRow(index);
+		}
+	</script>
+
+    <script type="text/javascript">
+      var submited=false;
+      $('form').jsonForm({
+        schema: {
+          "tipo": {
+              "type": "string",
+              "title": "Campos",
+              "enum": [ "nome", "endereco", "telefone", "email", "data_nascimento", "anexo" ]
+            }
+          },
+        "form": [
+        {
+          "key": "tipo",
+          "titleMap": {
+            "nome": "Nome",
+            "endereco": "Endereço",
+            "telefone": "Telefone",
+            "email": "E-mail",
+            "data_nascimento": "Data de nascimento",
+            "anexo": "Anexo",
+          }
+        },
+        {
+          "type": "submit",
+          "title": "Adicionar"
+        }
+        ],
+    onSubmit: function (errors, values) {
+        if(!submited)
+            addLine(values['tipo']);
+        else
+            submited = false;
+    }
+    });
+    </script>
+
+	<!--<script type="text/javascript">-->
+		<!--$('form').jsonForm({-->
+			<!--"schema": {-->
+    <!--"nome": {-->
+      <!--"type": "string",-->
+      <!--"title": "nome"-->
+    <!--},-->
+    <!--"endereco": {-->
+      <!--"type": "string",-->
+      <!--"title": "endereco"-->
+    <!--},-->
+    <!--"telefone": {-->
+      <!--"type": "string",-->
+      <!--"title": "telefone"-->
+    <!--},-->
+    <!--"email": {-->
+      <!--"type": "string",-->
+      <!--"title": "email"-->
+    <!--},-->
+    <!--"anexo": {-->
+      <!--"type": "string",-->
+      <!--"title": "email"-->
+    <!--},-->
+    <!--"opcoes": {-->
+      <!--"title": "Lista de opções",-->
+      <!--"description": "Escreva uma lista de opções separadas por ponto e vírgula",-->
+      <!--"type": "string"-->
+    <!--}-->
+  <!--},-->
+  <!--"form": [-->
+    <!--{-->
+      <!--"type": "selectfieldset",-->
+      <!--"title": "Tipo do campo",-->
+      <!--"items": [-->
+        <!--{-->
+          <!--"key": "nome",-->
+          <!--"legend": "Nome"-->
+        <!--},-->
+        <!--{-->
+          <!--"key": "telefone",-->
+          <!--"legend": "Telefone",-->
+        <!--},-->
+        <!--{-->
+          <!--"key": "endereco",-->
+          <!--"legend": "Endereço Residencial"-->
+        <!--},-->
+        <!--{-->
+          <!--"key": "anexo",-->
+          <!--"legend": "Documento de identidade digitalizada"-->
+        <!--},-->
+        <!--{-->
+          <!--"key": "email",-->
+          <!--"legend": "Email"-->
+        <!--},-->
+        <!--{-->
+          <!--"key": "opcoes",-->
+          <!--"legend": "Botão de opção",-->
+          <!--"placeholder": "Opção 1; Opção 2; Opção 3"-->
+        <!--}-->
+        <!--,-->
+        <!--{-->
+          <!--"key": "opcoes",-->
+          <!--"legend": "Caixa de seleção",-->
+          <!--"placeholder": "Seleção 1; Seleção 2; Seleção 3"-->
+        <!--}-->
+      <!--]-->
+    <!--},-->
+    <!--{-->
+      <!--"type": "submit",-->
+      <!--"title": "Adicionar"-->
+    <!--}-->
+  <!--],-->
+	<!--onSubmit: function (errors, values) {-->
+		<!--addLine(values['nome'], JSON.stringify(values, null, 2)) ;-->
+		<!--}-->
+<!--});-->
+	<!--</script>-->
+
+</body>
+
+</html>
