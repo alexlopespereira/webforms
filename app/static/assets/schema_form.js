@@ -1,0 +1,1 @@
+$('form').jsonForm({ schema: {"nome": {"minlength": 3, "required": true, "type": "string", "maxlength": 100}} });
