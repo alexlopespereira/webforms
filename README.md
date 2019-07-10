@@ -8,3 +8,4 @@ python run_generator.py
 2) Executar a aplicação web que retorna o formulario do serviço criado pelo gerador
 
 python run.py
+

@@ -1,1 +1,1 @@
-$('form').jsonForm({ schema: {"telefone": {"minlength": 8, "type": "string", "maxlength": 20}, "nome": {"minlength": 3, "required": true, "type": "string", "maxlength": 100}} });
+$('form').jsonForm({ schema: {"endereco": {"minlength": 5, "type": "string", "maxlength": 200}, "nome": {"minlength": 3, "required": true, "type": "string", "maxlength": 100}} });

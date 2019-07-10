@@ -21,7 +21,7 @@ def write_schema(python_file, javascript_file, selected):
     newschema = dict((k, all_schemas[k]) for k in selected)
     schema_str = "schema = " + json.dumps(newschema)
     js_schema_str = "schema: " + json.dumps(newschema)
-    write_file(python_file, schema_str.replace('true', 'True').replace('false', 'False'))
+    # write_file(python_file, schema_str.replace('true', 'True').replace('false', 'False'))
     javascript_str = """$('form').jsonForm({{ {0} }});""".format(js_schema_str)
     write_file(javascript_file, javascript_str)
 
