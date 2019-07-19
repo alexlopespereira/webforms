@@ -42,4 +42,4 @@ def create_form():
     template = render_template('generator.html', messages=['You were successfully logged in'])
     return template
 
-app2.run(port=8080)
+app2.run(host="0.0.0.0", port=8080)
