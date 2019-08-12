@@ -1,8 +1,14 @@
-version: '3'
+version: '3.6'
 services:
-  web:
-    build: .
-    ports:
-      - "8080:8080"
-    volumes:
-      - .:/code
+    web:
+      build: .
+      ports:
+        - "8088:8088"
+      volumes:
+        - .:/code
+
+    flowable-all-in-one:
+          image: flowable/all-in-one
+          container_name: all-in-one
+          ports:
+              - 8080:8080
