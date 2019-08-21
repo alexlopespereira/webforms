@@ -9,7 +9,9 @@ app.config['SECRET_KEY'] = "test"
 
 
 @app.route('/')
-def index(servico):
-    return render_template('example.html', schema_form=servico+'.js')
+def index():
+    return render_template('example.html')
 
-app.run()
+if __name__ == "__main__":
+    # Only for debugging while developing
+    app.run(host='0.0.0.0', debug=True, port=8088)
