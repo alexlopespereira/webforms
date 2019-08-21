@@ -1,12 +1,5 @@
 version: '3.6'
 services:
-    web:
-      build: .
-      ports:
-        - "8088:8088"
-      volumes:
-        - .:/code
-
     flowable-all-in-one-app:
         image: flowable/all-in-one
         depends_on:
@@ -33,5 +26,21 @@ services:
         volumes:
             - all-in-one_pgdata:/var/lib/postgresql/data
         command: postgres
+    
+    application:
+        build: ./application
+        ports:
+            - "8088:8088"
+        volumes:
+            - schema:/app/static/schema
+    
+    generator:
+        build: ./generator
+        ports:
+            - "8089:8089"
+        volumes:
+            - schema:/app/static/schema
+
 volumes: 
     all-in-one_pgdata:
+    schema:
