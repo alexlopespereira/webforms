@@ -1,1 +1,0 @@
-$('form').jsonForm({ schema: {"endereco": {"minlength": 5, "type": "string", "maxlength": 200}, "nome": {"minlength": 3, "required": true, "type": "string", "maxlength": 100}} });
