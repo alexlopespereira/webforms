@@ -75,11 +75,19 @@
 			<div class="panel-heading">Tabela de Campos</div>
 			</div>
 			<form method="post" onsubmit="return send_table_data();">
-        <h4> 
+        
+        <input list="tipo_processo">
+        <datalist id="tipo_processo">
+          <option value="Processo  Tipo 1">
+          <option value="Processo  Tipo 2">
+        </datalist>
+        <br> 
         <h4> Nome do Orgão:</h4> 
-        <input type="text" id="orgao"><br>
+        <input type="text" id="orgao">
+        <br>
         <h4> Nome do Serviço:</h4>
-        <input type="text" id="servico"><br>
+        <input type="text" id="servico">
+        <br>
 
 				<table class="table" id="fieldTable">
 					  </table>
@@ -124,7 +132,9 @@
 			$('#fieldTable tr').each(function(row, tr){
 				TableData[row]=$(tr).find('td:eq(3)').text()
 			});
+      TableData.unshift(document.getElementById("orgao").value ,document.getElementById("servico").value);
 			//TableData.shift();  // first row will be empty - so remove
+      console.log(TableData)
 			return TableData;
 		}
 		function send_table_data(){
