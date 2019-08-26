@@ -75,7 +75,7 @@
 			<div class="panel-heading">Tabela de Campos</div>
 			</div>
 			<form method="post" onsubmit="return send_table_data();">
-        <h4> Tipo de Processo:</h4>
+        <h4> Tipo de Processo:</h4> 
         <select id="tipo_processo" name="tipo_processo">
           <option value="tipo_1">Tipo 1</option>
           <option value="tipo_2">Tipo 2</option>
@@ -131,7 +131,9 @@
 			$('#fieldTable tr').each(function(row, tr){
 				TableData[row]=$(tr).find('td:eq(3)').text()
 			});
-      TableData.unshift(document.getElementById("tipo_processo").value , document.getElementById("orgao").value ,document.getElementById("servico").value);
+      TableData.unshift(document.getElementById("tipo_processo").value, 
+                        document.getElementById("orgao").value.replace(/ /g,"_"),
+                        document.getElementById("servico").value.replace(/ /g,"_"));
 			//TableData.shift();  // first row will be empty - so remove
       console.log(TableData)
 			return TableData;
@@ -141,7 +143,7 @@
 			submited = true
 			$.ajax({
 				type: "POST",
-				url: "/create_form",
+				url: "/create_form/" + tdata[2],
 				data: JSON.stringify(tdata),
 				contentType: 'application/json;charset=UTF-8',
 				success: function(msg){

@@ -31,8 +31,8 @@ def index():
     template = render_template('generator.html')
     return template
 
-@app2.route('/create_form', methods=["POST"])
-def create_form():
+@app2.route('/create_form/<servico>', methods=["POST"])
+def create_form(servico):
     print(request.json)
     write_schema(python_schemas_file, "./app/static/assets/"+servico+".js", request.json)
     # flash(u'Sua nova aplicacao foi criada. Reinicie o servidor e atualize o browser.')
