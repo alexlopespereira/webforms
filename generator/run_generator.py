@@ -18,7 +18,7 @@ def write_file(filename, data):
 
 def write_schema(python_file, javascript_file, selected):
     newschema = dict((k, all_schemas[k]) for k in selected)
-    schema_str = "schema = " + json.dumps(newschema)
+    schema_str = "schema =  " + json.dumps(newschema)
     js_schema_str = "schema: " + json.dumps(newschema)
     # write_file(python_file, schema_str.replace('true', 'True').replace('false', 'False'))
     javascript_str = """$('form').jsonForm({{ {0} }});""".format(js_schema_str)
@@ -33,6 +33,10 @@ def index():
 
 @app2.route('/create_form/<servico>', methods=["POST"])
 def create_form(servico):
+    print(type(request.json))
+    request.json.pop(0)
+    request.json.pop(0)
+    request.json.pop(0)
     print(request.json)
     write_schema(python_schemas_file, "./app/static/assets/"+servico+".js", request.json)
     # flash(u'Sua nova aplicacao foi criada. Reinicie o servidor e atualize o browser.')
