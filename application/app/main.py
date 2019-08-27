@@ -7,6 +7,7 @@ app = Eve(__name__, static_folder="static")
 
 app.config['SECRET_KEY'] = "test"
 
-@app.route('/')
-def index():
-    return render_template('example.html')
+@app.route('/<form_name>')
+def index(form_name):
+    form_name = form_name + '.js'
+    return render_template('example.html', value=form_name)
