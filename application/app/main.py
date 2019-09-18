@@ -11,3 +11,6 @@ app.config['SECRET_KEY'] = "test"
 def index(form_name):
     form_name = form_name
     return render_template('index.html', form_name=form_name)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True, port=8088)
