@@ -34,14 +34,14 @@ services:
         ports:
             - "8088:8088"
         volumes:
-            - schema:/app/static/schema
+            - schema:/app/static/assets
     
     generator:
         build: ./generator
         ports:
             - "8089:8089"
         volumes:
-            - schema:/app/static/schema
+            - schema:/app/static/assets
 
 volumes: 
     all-in-one_pgdata:
