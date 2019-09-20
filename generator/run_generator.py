@@ -39,9 +39,6 @@ def create_form(servico):
     request.json.pop(0)
     print(request.json)
     write_schema(python_schemas_file, "/app/static/assets/"+servico+".js", request.json)
-    # flash(u'Sua nova aplicacao foi criada. Reinicie o servidor e atualize o browser.')
-    # return redirect(url_for('index'))
-    # return send_from_directory("templates", 'generator.html', messages=['You were successfully logged in'])
     template = render_template('generator.html', messages=['You were successfully logged in'])
     return template
 
