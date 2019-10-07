@@ -1,8 +1,8 @@
 FROM python:3-alpine
 ENV PYTHONUNBUFFERED 1
-RUN mkdir /code
-WORKDIR /code
-COPY requirements.txt /code/
+RUN mkdir /app
+WORKDIR /app
+COPY requirements.txt /app/
 RUN pip install -r requirements.txt && apk add bash
-COPY . /code/
+COPY . /app/
 CMD bash -c "python3 run_generator.py"
