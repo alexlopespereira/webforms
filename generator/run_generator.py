@@ -70,7 +70,7 @@ def create_form(servico):
     print("Creating process. Status: {0}".format(r.response))
 
     url = 'http://flowable-all-in-one-app:8080/flowable-task/app-api/app-repository/deployments/'
-    files = {'file': open(APP_PATH + "/static/assets/App1.zip", 'rb')}
+    files = {'file': open(APP_PATH + "/static/assets/App1.zip", 'rb')} #TODO: Alterar o arquivo App1.zip antes de enviar
     data = {'deploymentKey': servico, 'deploymentName': servico}
     r = requests.post(url, files=files, data=data, auth=('admin', 'test'))
 
