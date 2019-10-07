@@ -32,7 +32,7 @@ WORKDIR /app
 
 # Install Requirements
 COPY requirements.txt /app/
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt && apk add bash
 
 # Make /app/* available to be imported by Python globally to better support several use cases like Alembic migrations.
 ENV PYTHONPATH=/app
