@@ -26,14 +26,14 @@ services:
         volumes:
             - all-in-one_pgdata:/var/lib/postgresql/data
         command: postgres
-    
+
     application:
         build: ./application
         ports:
             - "8088:8088"
         volumes:
             - schema:/app/static/assets
-    
+
     generator:
         build: ./generator
         ports:

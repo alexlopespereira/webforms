@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>Servico {{ form_name }}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -11,6 +10,8 @@
     <link href="{{ url_for('static', filename='assets/styles.38d521a2fe6425022110.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='assets/style.css') }}" rel="stylesheet">
 
+    <title>Servico {{ form_name }}</title>
+    
     <style type="text/css">
       .container {
         max-width: 500px;
@@ -22,6 +23,7 @@
 
 <body>
 <div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
+
     <ul id="menu-barra-temp" style="list-style:none;">
         <li style="display:inline; float:left;padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED">
             <a href="http://brasil.gov.br" style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal do Governo Brasileiro</a>
@@ -41,11 +43,12 @@
     </div>
 </nav>
     <div class="container">
-        <form method="post" action="/api/people"></form>
+        <form method="post" action = "http://0.0.0.0:8088/{{ form_name }}" id="formData">
         <div id="res" class="alert"></div>
     </div>
     <div id="footer-brasil"></div>
- 
+
+    <script src="{{ url_for('static', filename='deps/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='deps/underscore.js') }}"></script>
     <script src="{{ url_for('static', filename='deps/opt/jsv.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/jsonform.js') }}"></script>
@@ -57,8 +60,9 @@
     var script = document.createElement("script");
     script.src = folder + file
     document.body.appendChild(script);
-    </script>
 
+    </script>
+    
 </body>
 
 </html>
