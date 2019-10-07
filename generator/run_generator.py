@@ -28,6 +28,15 @@ def write_schema(python_file, javascript_file, selected):
     write_file(javascript_file, javascript_str)
 
 
+def create_xml(srcfile, destfile, formkey):
+    context = {
+        'formkey': formkey
+    }
+    with open(destfile, 'w') as f:
+        html = render_template(srcfile, context=context)
+        f.write(html)
+
+
 @app2.route('/')
 def index():
     # return render_template('generator.html')
@@ -37,9 +46,10 @@ def index():
 @app2.route('/create_form/<servico>', methods=["POST"])
 def create_form(servico):
     print(type(request.json))
-    request.json.pop(0)
-    request.json.pop(0)
-    request.json.pop(0)
+    v1 = request.json.pop(0)
+    v2 = request.json.pop(0)
+    v3 = request.json.pop(0)
+    print([v1, v2, v3])
     print(request.json)
     write_schema(python_schemas_file, APP_PATH + "/static/assets/"+servico+".js", request.json)
     template = render_template('generator.html', messages=['You were successfully logged in'])
@@ -49,6 +59,21 @@ def create_form(servico):
     files = {'file': open(APP_PATH + "/static/assets/"+servico+".form", 'rb')}
     data = {'deploymentKey': servico, 'deploymentName': servico}
     r = requests.post(url, files=files, data=data, auth=('admin', 'test'))
+
+    url = 'http://flowable-all-in-one-app:8080/flowable-task/process-api/process-repository/deployments/'
+    srcfile = APP_PATH + "/static/assets/{0}.bpmn20.xml".format(v1)
+    destfile = APP_PATH + "/static/assets/{0}.bpmn20_{1}.xml".format(v1, servico)
+    create_xml(srcfile, destfile, servico)
+    files = {'file': destfile}
+    data = {'deploymentKey': 'proc_modelo', 'deploymentName': 'proc_modelo'}
+    r = requests.post(url, files=files, data=data, auth=('admin', 'test'))
+    print("Creating process. Status: {0}".format(r.response))
+
+    url = 'http://flowable-all-in-one-app:8080/flowable-task/app-api/app-repository/deployments/'
+    files = {'file': open(APP_PATH + "/static/assets/App1.zip", 'rb')}
+    data = {'deploymentKey': servico, 'deploymentName': servico}
+    r = requests.post(url, files=files, data=data, auth=('admin', 'test'))
+
     return template
 
 
