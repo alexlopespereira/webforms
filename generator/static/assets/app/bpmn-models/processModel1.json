@@ -1,0 +1,184 @@
+{
+  "id": "54afeb58-e93e-11e9-b996-0242ac120005",
+  "name": "Process Model 1",
+  "key": "processModel1",
+  "description": "",
+  "editorJson": {
+    "modelId": "54afeb58-e93e-11e9-b996-0242ac120005",
+    "bounds": {
+      "lowerRight": { "x": 1200, "y": 1050 },
+      "upperLeft": { "x": 0, "y": 0 }
+    },
+    "properties": {
+      "process_id": "processModel1",
+      "name": "Process Model 1",
+      "documentation": "",
+      "process_author": "",
+      "process_version": "",
+      "process_namespace": "http://www.flowable.org/processdef",
+      "process_historylevel": "",
+      "isexecutable": true,
+      "dataproperties": "",
+      "executionlisteners": "{\"executionListeners\":[]}",
+      "eventlisteners": "{\"eventListeners\":[]}",
+      "signaldefinitions": "[]",
+      "messagedefinitions": "[]",
+      "escalationdefinitions": "[]",
+      "process_potentialstarteruser": "",
+      "process_potentialstartergroup": "",
+      "iseagerexecutionfetch": "false",
+      "messages": []
+    },
+    "childShapes": [
+      {
+        "resourceId": "startEvent1",
+        "properties": {
+          "overrideid": "startEvent1",
+          "name": "",
+          "documentation": "",
+          "executionlisteners": { "executionListeners": [] },
+          "initiator": "",
+          "formkeydefinition": "form1",
+          "formreference": {
+            "id": "70daeaf9-e93e-11e9-b996-0242ac120005",
+            "name": "Form1",
+            "key": "form1"
+          },
+          "formfieldvalidation": true,
+          "formproperties": "",
+          "interrupting": true
+        },
+        "stencil": { "id": "StartNoneEvent" },
+        "childShapes": [],
+        "outgoing": [
+          { "resourceId": "sid-3C43A3F1-6864-4F42-B227-147A3CAD5F68" }
+        ],
+        "bounds": {
+          "lowerRight": { "x": 130, "y": 193 },
+          "upperLeft": { "x": 100, "y": 163 }
+        },
+        "dockers": []
+      },
+      {
+        "resourceId": "sid-21C1E904-ECA0-4160-86BE-CB3322391421",
+        "properties": {
+          "overrideid": "sid-21C1E904-ECA0-4160-86BE-CB3322391421",
+          "name": "Fill form",
+          "documentation": "",
+          "asynchronousdefinition": false,
+          "exclusivedefinition": true,
+          "executionlisteners": { "executionListeners": [] },
+          "multiinstance_type": "None",
+          "multiinstance_cardinality": "",
+          "multiinstance_collection": "",
+          "multiinstance_variable": "",
+          "multiinstance_condition": "",
+          "isforcompensation": false,
+          "usertaskassignment": {
+            "assignment": {
+              "type": "static",
+              "assignee": "$INITIATOR",
+              "initiatorCanCompleteTask": true
+            }
+          },
+          "formkeydefinition": "form1",
+          "formreference": {
+            "id": "70daeaf9-e93e-11e9-b996-0242ac120005",
+            "name": "Form1",
+            "key": "form1"
+          },
+          "formfieldvalidation": true,
+          "duedatedefinition": "",
+          "prioritydefinition": "",
+          "formproperties": "",
+          "tasklisteners": { "taskListeners": [] },
+          "skipexpression": "",
+          "categorydefinition": ""
+        },
+        "stencil": { "id": "UserTask" },
+        "childShapes": [],
+        "outgoing": [
+          { "resourceId": "sid-A735E1B3-B63F-4E78-B683-B028D8D47F19" }
+        ],
+        "bounds": {
+          "lowerRight": { "x": 265, "y": 215 },
+          "upperLeft": { "x": 165, "y": 135 }
+        },
+        "dockers": []
+      },
+      {
+        "resourceId": "sid-3C43A3F1-6864-4F42-B227-147A3CAD5F68",
+        "properties": {
+          "overrideid": "sid-3C43A3F1-6864-4F42-B227-147A3CAD5F68",
+          "name": "",
+          "documentation": "",
+          "conditionsequenceflow": "",
+          "executionlisteners": "",
+          "defaultflow": "false",
+          "skipexpression": ""
+        },
+        "stencil": { "id": "SequenceFlow" },
+        "childShapes": [],
+        "outgoing": [
+          { "resourceId": "sid-21C1E904-ECA0-4160-86BE-CB3322391421" }
+        ],
+        "bounds": {
+          "lowerRight": { "x": 164.78169969647763, "y": 177.54813849089433 },
+          "upperLeft": { "x": 130.06205030352237, "y": 176.50654900910567 }
+        },
+        "dockers": [{ "x": 15, "y": 15 }, { "x": 50, "y": 40 }],
+        "target": { "resourceId": "sid-21C1E904-ECA0-4160-86BE-CB3322391421" }
+      },
+      {
+        "resourceId": "sid-1D0BBC97-C5C6-4FFA-9661-61BB22067886",
+        "properties": {
+          "overrideid": "sid-1D0BBC97-C5C6-4FFA-9661-61BB22067886",
+          "name": "",
+          "documentation": "",
+          "executionlisteners": { "executionListeners": [] }
+        },
+        "stencil": { "id": "EndNoneEvent" },
+        "childShapes": [],
+        "outgoing": [],
+        "bounds": {
+          "lowerRight": { "x": 348, "y": 192 },
+          "upperLeft": { "x": 320, "y": 164 }
+        },
+        "dockers": []
+      },
+      {
+        "resourceId": "sid-A735E1B3-B63F-4E78-B683-B028D8D47F19",
+        "properties": {
+          "overrideid": "sid-A735E1B3-B63F-4E78-B683-B028D8D47F19",
+          "name": "",
+          "documentation": "",
+          "conditionsequenceflow": "",
+          "executionlisteners": "",
+          "defaultflow": "false",
+          "skipexpression": ""
+        },
+        "stencil": { "id": "SequenceFlow" },
+        "childShapes": [],
+        "outgoing": [
+          { "resourceId": "sid-1D0BBC97-C5C6-4FFA-9661-61BB22067886" }
+        ],
+        "bounds": {
+          "lowerRight": { "x": 319.875, "y": 178 },
+          "upperLeft": { "x": 265.328125, "y": 175 }
+        },
+        "dockers": [
+          { "x": 50, "y": 40 },
+          { "x": 292, "y": 175 },
+          { "x": 292, "y": 178 },
+          { "x": 14, "y": 14 }
+        ],
+        "target": { "resourceId": "sid-1D0BBC97-C5C6-4FFA-9661-61BB22067886" }
+      }
+    ],
+    "stencil": { "id": "BPMNDiagram" },
+    "stencilset": {
+      "namespace": "http://b3mn.org/stencilset/bpmn2.0#",
+      "url": "../editor/stencilsets/bpmn2.0/bpmn2.0.json"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "c549c16a-e93e-11e9-b996-0242ac120005",
+  "name": "App1",
+  "key": "app1",
+  "description": "",
+  "editorJson": {
+    "models": [
+      {
+        "id": "54afeb58-e93e-11e9-b996-0242ac120005",
+        "name": "Process Model 1",
+        "version": 1,
+        "modelType": 0,
+        "description": "",
+        "stencilSetId": null,
+        "createdBy": "admin",
+        "lastUpdatedBy": "admin",
+        "lastUpdated": "2019-10-07T20:09:25.877+0000"
+      }
+    ],
+    "theme": "theme-1",
+    "icon": "glyphicon-asterisk"
+  }
+}

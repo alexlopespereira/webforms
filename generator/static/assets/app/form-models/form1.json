@@ -1,0 +1,26 @@
+{
+  "id": "70daeaf9-e93e-11e9-b996-0242ac120005",
+  "name": "Form1",
+  "key": "form1",
+  "description": "",
+  "editorJson": {
+    "name": "Form1",
+    "key": "form1",
+    "version": 0,
+    "fields": [
+      {
+        "fieldType": "FormField",
+        "id": "nome",
+        "name": "Nome",
+        "type": "text",
+        "value": null,
+        "required": false,
+        "readOnly": false,
+        "overrideId": false,
+        "placeholder": null,
+        "layout": null
+      }
+    ],
+    "outcomes": []
+  }
+}
