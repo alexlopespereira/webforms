@@ -1,0 +1,17 @@
+{
+  "key": "{{ formkey }}",
+  "name": "This is a",
+  "fields": [
+  {% block body %}
+    {% for field in fields%}
+      {
+          "id": "{{ field }}",
+          "name": "{{ field }}",
+          "type": "text",
+          "required": false,
+          "placeholder": "empty"
+      },
+    {% endfor %}
+  {% endblock %}
+  ]
+}
