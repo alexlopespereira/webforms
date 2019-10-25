@@ -7,7 +7,6 @@ from flask import request, flash, render_template
 from werkzeug.utils import redirect
 from static.schemas import all_schemas
 import create_xml
-import create_templates
 
 
 app2 = Flask(__name__, static_url_path='/static')
@@ -43,8 +42,6 @@ def create_form(servico):
     v3 = request.json.pop(0)
     print([v1, v2, v3])
     fields = request.json
-
-    create_templates.create_form_template()
 
     write_schema(python_schemas_file, APP_PATH + "/static/assets/"+servico+".js", request.json)
     template = render_template('generator.html', messages=['You were successfully'])
