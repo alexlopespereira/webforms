@@ -1,17 +1,22 @@
 {
-  "key": "{{ formkey }}",
-  "name": "This is a",
+  "key": "{{context['formkey']}}",
+  "name": "This is a form template",
   "fields": [
-  {% block body %}
-    {% for field in fields%}
+    {% for field in context['fields']%}
       {
-          "id": "{{ field }}",
-          "name": "{{ field }}",
+          "id": "{{field}}",
+          "name": "{{field}}",
           "type": "text",
           "required": false,
           "placeholder": "empty"
       },
     {% endfor %}
-  {% endblock %}
+      {
+          "id": "comentario",
+          "name": "comentario",
+          "type": "text",
+          "required": false,
+          "placeholder": "empty"
+      } 
   ]
 }
