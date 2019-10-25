@@ -14,8 +14,11 @@ def create_xml_form(srcfile, destfile, fields, servico):
         'formkey': servico,
         'fields': fields
     }
+    print(servico)
+
+    print(fields)
     with open(destfile, 'w') as f:
-        html = render_template(srcfile, context=context)
+        html = render_template("Form.form", context=context)
         f.write(html)
     print("Creating form xml")
 
