@@ -1,7 +1,7 @@
 {
   "id": "c549c16a-e93e-11e9-b996-0242ac120005",
-  "name": "{{formkey}}",
-  "key": "{{formkey}}",
+  "name": "{{appkey}}",
+  "key": "{{appkey}}",
   "description": "",
   "editorJson": {
     "models": [
