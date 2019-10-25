@@ -18,40 +18,53 @@ def create_xml_form(srcfile, destfile, fields, servico):
 
     print(fields)
     with open(destfile, 'w') as f:
-        html = render_template("Form.form", context=context)
+        html = render_template(srcfile, context=context)
         f.write(html)
     print("Creating form xml")
 
 def create_form(servico, fields):
-    url = 'http://flowable-all-in-one-app:8080/flowable-task/process-api/process-repository/deployments/'
-    srcfile = APP_PATH + "/static/assets/{0}.form".format("Form")
-    destfile = APP_PATH + "/static/assets/forms/{0}.form".format(servico)
+    url = 'http://flowable-all-in-one-app:8080/flowable-task/form-api/form-repository/deployments/'
+    
+    srcfile = "{0}.form".format("Form")
+    destfile = APP_PATH + "/static/assets/{0}.form".format(servico)
+    
     create_xml_form(srcfile, destfile, fields, servico)
-    files = {'file': destfile}
+    
+    files = {'file': open(destfile,'rb')}
     data = {'deploymentKey': servico, 'deploymentName': servico}
+
     r = requests.post(url, files=files, data=data, auth=('admin', 'test'))
-    print("Creating form. Status: {0}".format(r.response))
+    
+    print("Creating form. Status: {0}".format(r.status_code))
 
 
 #------------------------------------------------------------------------------------------------
-def create_xml_process(srcfile, destfile, formkey):
+def create_xml_process(srcfile, destfile, servico):
     context = {
-        'formkey': formkey
+        'formkey': servico,
+        'processid': servico
     }
+
     with open(destfile, 'w') as f:
         html = render_template(srcfile, context=context)
         f.write(html)
+    
     print("Creating process xml")
 
 def create_process(v1, servico):
-    url = 'http://flowable-all-in-one-app:8080/flowable-task/process-api/process-repository/deployments/'
-    srcfile = APP_PATH + "/static/assets/{0}.bpmn20.xml".format(v1)
-    destfile = APP_PATH + "/static/assets/{0}.bpmn20_{1}.xml".format(v1, servico)
+    url = 'http://flowable-all-in-one-app:8080/flowable-task/process-api/repository/deployments/'
+    
+    srcfile = "{0}.bpmn20.xml".format(v1)
+    destfile = APP_PATH + "/static/assets/processes{0}_{1}.bpmn20.xml".format(v1, servico)
+    
     create_xml_process(srcfile, destfile, servico)
-    files = {'file': destfile}
+    
+    files = {'file': open(destfile,'rb')}
     data = {'deploymentKey': servico, 'deploymentName': servico}
+
     r = requests.post(url, files=files, data=data, auth=('admin', 'test'))
-    print("Creating process. Status: {0}".format(r.response))
+    
+    print("Creating process. Status: {0}".format(r.status_code))
 
 
 #------------------------------------------------------------------------------------------------
@@ -75,4 +88,4 @@ def create_app(servico):
     create_xml_process(srcfile, destfile, servico)
     
     r = requests.post(url, files=files, data=data, auth=('admin', 'test'))
-    print("Creating process. Status: {0}".format(r.response))
+    print("Creating process. Status: {0}".format(r.status_code))
