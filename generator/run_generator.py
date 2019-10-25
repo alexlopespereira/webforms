@@ -47,7 +47,7 @@ def create_form(servico):
     template = render_template('generator.html', messages=['You were successfully'])
 
     create_xml.create_form(servico, fields)
-    #create_process(v1, servico)
+    create_xml.create_process(v1, servico)
     #create_app(servico)
 
     return template
