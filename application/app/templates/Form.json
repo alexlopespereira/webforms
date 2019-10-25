@@ -1,0 +1,18 @@
+{ 
+   "processDefinitionKey":"{{context['processid']}}",
+   "startFormVariables":[ 
+   {% for field, value in context['data']%}
+      { 
+         "name":"{{field}}",
+         "type":"string",
+         "value":"{{value}}"
+      },
+   {% endfor %}
+
+      { 
+         "name":"comentario",
+         "type":"string",
+         "value":"comentario"
+      }
+   ]
+}
