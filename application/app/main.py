@@ -22,9 +22,14 @@ def create_data(data, servico):
     
 @app.route('/<form_name>', methods = ['POST', 'GET'])
 def index(form_name):
-    if request.method == 'GET':
+    if request.method == 'GET' and form_name != "list":
         form_name = form_name
         return render_template('index.html', form_name=form_name)
+
+    elif request.method == 'GET' and form_name == "list":
+        process_list = get_process()
+        return render_template('list.html', process_list=process_list)
+
     else:
         print(request.form.items())
         print(request.form)
@@ -44,5 +49,11 @@ def index(form_name):
 
         return render_template('index.html', form_name=form_name)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True, port=8088)
+def get_process():
+    url = 'http://flowable-all-in-one-app:8080/flowable-task/process-api/runtime/process-instances'
+    r = requests.get(url, auth=('admin', 'test'))
+    process_list = r.json()
+
+    print("Getting processes. Status: {0}".format(r.status_code))
+
+    return process_list
